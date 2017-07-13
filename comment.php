@@ -1,7 +1,10 @@
-<?php         
-              //$connect=mysqli_connect("localhost","","","",""); 
-$connect=mysqli_connect("localhost","simptnhu","+d2n4?%KwE7!","simptnhu_yomarket","3306"); 
-			  
+<?php
+
+
+include 'notify_them.php' ;
+              //$connect=mysqli_connect("localhost","","","","");
+$connect=mysqli_connect("localhost","simptnhu","+d2n4?%KwE7!","simptnhu_yomarket","3306");
+
 
            $comment_user_name = $_GET['name'];
 		   $comment_register_id=$_GET['id'];
@@ -12,21 +15,46 @@ $connect=mysqli_connect("localhost","simptnhu","+d2n4?%KwE7!","simptnhu_yomarket
            $comment_profession = $_GET['profession'];
            $comment = $_GET['comment'];
            $post_id = $_GET['post_id'];
-                   
-		
 
-                        $sql1 = "INSERT INTO `comment_info`( `comment_user_name`, `comment_register_id`, `comment_contact_no`, `comment_date`, `comment_time`, `comment_city`, `comment_profession`, `comment`,`post_id`) 
-                        VALUES ('$comment_user_name','$comment_register_id','$comment_contact_no','$comment_date','$comment_time', '$comment_city','$comment_profession', '$comment','$post_id')";	
-			$resulst = mysqli_query($connect,$sql1); 
-			
+
+
+                          $sql = "SELECT p.post_posted_by_id, f.d_id FROM post as p INNER JOIN firebaseid AS f WHERE f.r_id = p.post_posted_by_id AND post_id = $post_id ;" ;
+                        $sql .= "INSERT INTO `comment_info`( `comment_user_name`, `comment_register_id`, `comment_contact_no`, `comment_date`, `comment_time`, `comment_city`, `comment_profession`, `comment`,`post_id`)
+                        VALUES ('$comment_user_name','$comment_register_id','$comment_contact_no','$comment_date','$comment_time', '$comment_city','$comment_profession', '$comment','$post_id')";
+			                  $resulst = mysqli_multi_query($connect,$sql);
+
                         if(! $resulst )
 			{
 				die('Could not enter data: ' . mysqli_error($connect));
+			} else{
+        do {
+       /* store first result set */
+       if ($result = mysqli_store_result($connect)) {
+           while ($row = mysqli_fetch_row($result)) {
+               $token = $row["d_id"];
+               notifythem($token,$comment_user_name,$comment);
+           }
+           mysqli_free_result($result);
+           break;
+
+       }
+       /* print divider */
+       if (mysqli_more_results($connect)) {
+           //printf("-----------------\n");
+
+       }
+     } while (mysqli_next_result($connect));
+
+
+
+
+
 			}
 
 			echo json_encode(array("server response"=>'comment sucessfull'));
-		  
 
-	
+
+
+
 		   mysqli_close($connect)
-?>  
+?>
