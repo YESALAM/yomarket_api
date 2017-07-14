@@ -1,21 +1,20 @@
 <?php
-
-function notifythem($id,$name,$comment){
+function notifythem($id,$msg){
 #API access key from Google API's Console
     define( 'API_ACCESS_KEY', 'AIzaSyDJQ6ffbkN9Xi-siRhKM-u5JZN8klf1TLQ' );
     $registrationIds = $id;
-#prep the bundle
-     $msg = array
+    #prep the bundle
+    /* $msg = array
           (
 		'body' 	=> $comment,
 		'title'	=> $name.' commented',
              	'icon'	=> 'myicon',/*Default Icon*/
-              	'sound' => 'mySound'/*Default sound*/
-          );
+              	//'sound' => 'mySound'/*Default sound*/
+        //  );
 	$fields = array
 			(
 				'to'		=> $registrationIds,
-				'notification'	=> $msg
+				'data'	=> $msg
 			);
 
 
