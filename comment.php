@@ -2,6 +2,8 @@
 
 
 include 'notify_them.php' ;
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
               //$connect=mysqli_connect("localhost","","","","");
 $connect=mysqli_connect("localhost","simptnhu","+d2n4?%KwE7!","simptnhu_yomarket","3306");
 
@@ -31,7 +33,12 @@ $connect=mysqli_connect("localhost","simptnhu","+d2n4?%KwE7!","simptnhu_yomarket
        /* store first result set */
        if ($result = mysqli_store_result($connect)) {
            while ($row = mysqli_fetch_row($result)) {
-               $token = $row["d_id"];
+             //foreach($row as $cname => $cvalue){
+            //   print "$cname: $cvalue\t";
+            // }
+            //  print "\r\n";
+              $token = $row["1"];
+               //echo $token;
                notifythem($token,$comment_user_name,$comment);
            }
            mysqli_free_result($result);

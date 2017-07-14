@@ -1,8 +1,9 @@
 <?php
+
 function notifythem($id,$name,$comment){
 #API access key from Google API's Console
     define( 'API_ACCESS_KEY', 'AIzaSyDJQ6ffbkN9Xi-siRhKM-u5JZN8klf1TLQ' );
-    $registrationIds = "dxOTpN5HFyE:APA91bFx3LUGhdiPKFbd7fV6K46odqBqMHMMy9GAGLDU54x_QhaM6UGS37EteqWjo8RxisxeSf9P7jDbdSQyIChvGy8-zIz3GVZG7qUi0LVGTI8wMiMxrDScnZtuqL3Qphy6r8uM5my3";
+    $registrationIds = $id;
 #prep the bundle
      $msg = array
           (
