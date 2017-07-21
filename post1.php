@@ -6,16 +6,23 @@
 
                    $postid=$_POST['post_id'];
                    $product = $_POST['product'];
-		   $profession=$_POST['profession'];
-		   $city=$_POST['city'];
+		                 $profession=$_POST['profession'];
+		                   $city=$_POST['city'];
                    $postname=$_POST['name'];
-		   $quantity = $_POST['quantity'];
-		   $price = $_POST['price'];
+		                 $quantity = $_POST['quantity'];
+		                   $price = $_POST['price'];
                    $discription = $_POST['discription'];
-		   $image1 = $_POST['image1'];
+                  $date = $_POST['date'];
+                  $time = $_POST['time'];
+
+
+
+		                 $image1 = $_POST['image1'];
                    $image2 = $_POST['image2'];
                    $image3 = $_POST['image3'];
                    $image4 = $_POST['image4'];
+
+
 
                  $filename=0;
 
@@ -67,8 +74,8 @@
 
 
                         $sql1 = "INSERT INTO `post`(`post_posted_by_id`,`post_posted_by`, `post_product`, `post_city`, `post_profession`, `post_quantity`, `post_price`,
-                        `post_description`,`post_image_1`,`post_image_2`,`post_image_3`,`post_image_4`)
-                        VALUES ('$postid','$postname','$product','$city','$profession','$quantity','$price','$discription','$i1','$i2','$i3','$i4')";
+                        `post_description`,`post_image_1`,`post_image_2`,`post_image_3`,`post_image_4`,`date`,`time`)
+                        VALUES ('$postid','$postname','$product','$city','$profession','$quantity','$price','$discription','$i1','$i2','$i3','$i4','$date','$time')";
 
 			$resulst = mysqli_query($connect,$sql1);
 			if(! $resulst )
