@@ -71,7 +71,7 @@ $connect=mysqli_connect("localhost","simptnhu","+d2n4?%KwE7!","simptnhu_yomarket
 
               $msg = array(
                'comment' 	=> $comment,
-                'comment_user_name'	=> $comment_user_name." Commented on your post",
+                'comment_user_name'	=> $comment_user_name." replied to your comment",
                  'post_id'	=> $post_id,
                  'post_product' => $post_product,
                  'post_city' 	=> $post_city,
