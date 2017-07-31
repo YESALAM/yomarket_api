@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include 'notify_them.php' ;
+include 'notify_comment.php' ;
               //$connect=mysqli_connect("localhost","","","","");
 
 $connect=mysqli_connect("localhost","simptnhu","+d2n4?%KwE7!","simptnhu_yomarket","3306");
@@ -21,7 +21,8 @@ $connect=mysqli_connect("localhost","simptnhu","+d2n4?%KwE7!","simptnhu_yomarket
 
 
 
-                          $sql = "SELECT p.post_posted_by_id, f.d_id FROM post as p INNER JOIN firebaseid AS f WHERE f.r_id = p.post_posted_by_id AND post_id = $post_id ;" ;
+                          //SELECT p.post_posted_by_id, f.d_id FROM post as p INNER JOIN firebaseid AS f WHERE f.r_id = p.post_posted_by_id AND post_id = $post_id ;
+                          $sql = "SELECT DISTINCT F.d_id FROM `firebaseid` as F INNER JOIN `comment_info` as C WHERE C.comment_register_id = F.r_id and C.post_id = $post_id ;" ;
                           $sql .= "SELECT * FROM `post` WHERE post_id = '$post_id';" ;
                         $sql .= "INSERT INTO `comment_info`( `comment_user_name`, `comment_register_id`, `comment_contact_no`, `comment_date`, `comment_time`, `comment_city`, `comment_profession`, `comment`,`post_id`)
                         VALUES ('$comment_user_name','$comment_register_id','$comment_contact_no','$comment_date','$comment_time', '$comment_city','$comment_profession', '$comment','$post_id')";
@@ -36,15 +37,20 @@ $connect=mysqli_connect("localhost","simptnhu","+d2n4?%KwE7!","simptnhu_yomarket
          /* store first result set */
 
          if ($result = mysqli_store_result($connect)) {
-           $row = mysqli_fetch_row($result);
+           //$row = mysqli_fetch_row($result);
            //foreach($row as $cname => $cvalue){
           //  print "$cname: $cvalue\t";
            //}
-           $token = $row["1"];
+            $gcmRegIds = array();
+           while ($row = mysqli_fetch_row($result)) {
+             array_push($gcmRegIds, $row["0"]);
+           }
+
+           //$token = $row["1"];
            //echo $token;
            mysqli_free_result($result);
 
-           mysqli_next_result($connect) ;
+           mysqli_next_result($connect);
            $result = mysqli_store_result($connect);
            $row = mysqli_fetch_row($result);
            //foreach($row as $cname => $cvalue){
@@ -90,7 +96,7 @@ $connect=mysqli_connect("localhost","simptnhu","+d2n4?%KwE7!","simptnhu_yomarket
 
 
 
-                notifythem($token,$msg);
+                notifythem($gcmRegIds,$msg);
 
          /* while ($row = mysqli_fetch_row($result)) {
             foreach($row as $cname => $cvalue){
