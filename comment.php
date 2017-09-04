@@ -20,6 +20,26 @@ $connect=mysqli_connect("localhost","simptnhu","+d2n4?%KwE7!","simptnhu_yomarket
     $post_id = $_GET['post_id'];
 
 
+    $sql_test = "SELECT * FROM `comment_info` WHERE comment_user_name = '$comment_user_name'
+    AND comment_register_id = '$comment_register_id' AND comment_contact_no = '$comment_contact_no'
+    AND comment_date = '$comment_date' AND comment_time = '$comment_time'
+    AND comment_city = '$comment_city' and comment_profession = '$comment_profession'
+    AND comment = '$comment' AND post_id = '$post_id' ";
+
+  //  echo "5";
+    if($res = mysqli_query($connect,$sql_test)){
+
+      $rowcount=mysqli_num_rows($res);
+      //echo "$rowcount";
+      if($rowcount>0){
+
+        echo json_encode(array("server response"=>'already exists'));
+        die("");
+      }
+      mysqli_free_result($res);
+    }
+
+
 
                           //SELECT p.post_posted_by_id, f.d_id FROM post as p INNER JOIN firebaseid AS f WHERE f.r_id = p.post_posted_by_id AND post_id = $post_id ;
                           $sql = "SELECT DISTINCT F.d_id FROM `firebaseid` as F INNER JOIN `comment_info` as C WHERE C.comment_register_id = F.r_id and C.post_id = $post_id ;" ;
