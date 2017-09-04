@@ -23,6 +23,24 @@
                    $image4 = $_POST['image4'];
 
 
+                  $sql_test = "SELECT * FROM `post` WHERE post_product = '$product' AND post_city = '$city'
+                  AND post_profession = '$profession' AND post_quantity = '$quantity' AND post_price = '$price'
+                  and post_description = '$discription' and post_posted_by_id = '$postid' AND post_posted_by = '$postname'
+                  and date = '$date' AND time = '$time' ";
+
+                //  echo "5";
+                  if($res = mysqli_query($connect,$sql_test)){
+
+                    $rowcount=mysqli_num_rows($res);
+                    //echo "$rowcount";
+                    if($rowcount>0){
+
+                      echo json_encode(array("server response"=>'already exists'));
+                      die("");
+                    }
+                    mysqli_free_result($res);
+                  }
+
 
                  $filename=0;
 
