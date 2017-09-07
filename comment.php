@@ -22,7 +22,7 @@ $connect=mysqli_connect("localhost","simptnhu","+d2n4?%KwE7!","simptnhu_yomarket
 
     $sql_test = "SELECT * FROM `comment_info` WHERE comment_user_name = '$comment_user_name'
     AND comment_register_id = '$comment_register_id' AND comment_contact_no = '$comment_contact_no'
-    AND comment_date = '$comment_date' AND comment_time = '$comment_time'
+    AND comment_date = '$comment_date'
     AND comment_city = '$comment_city' and comment_profession = '$comment_profession'
     AND comment = '$comment' AND post_id = '$post_id' ";
 

@@ -26,7 +26,7 @@
                   $sql_test = "SELECT * FROM `post` WHERE post_product = '$product' AND post_city = '$city'
                   AND post_profession = '$profession' AND post_quantity = '$quantity' AND post_price = '$price'
                   and post_description = '$discription' and post_posted_by_id = '$postid' AND post_posted_by = '$postname'
-                  and date = '$date' AND time = '$time' ";
+                  and date = '$date'  ";
 
                 //  echo "5";
                   if($res = mysqli_query($connect,$sql_test)){
